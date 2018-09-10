@@ -1,0 +1,39 @@
+service: webbug
+provider:
+  name: aws
+  runtime: python2.7
+  vpc:
+    securityGroupIds:
+      - sg-xxxx
+    subnetIds: 
+      - subnet-xxxx
+      - subnet-xxxx
+      - subnet-xxxx
+
+  stage: webbug
+  region: eu-west-1
+
+functions:
+  ping:
+    handler: handler.ping
+    events:
+      - http:
+          path: collect/ping
+          method: get
+  
+  enum:
+    handler: handler.js_enum
+    events:
+      - http:
+          path: collect/enum
+          method: get
+
+  collect:
+    handler: handler.collector
+    events:
+      - http:
+          path: collect/info
+          method: post
+
+plugins:
+   - serverless-python-requirements
