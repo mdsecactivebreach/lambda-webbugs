@@ -114,7 +114,7 @@ def collector(event, context):
             "headers": {
                 'Content-Type': 'text/html'
             },
-            "body":  "<html><body>%s</body></html>" % (e.message)
+            "body":  "<html><body></body></html>"
         }
         return response
 
